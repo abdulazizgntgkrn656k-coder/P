@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>BUG ★LUXURY★ V10</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            color: #0f0;
+            text-align: center;
+        }
+        #container {
+            width: 80%;
+            margin: 100px auto;
+        }
+        #input-kode {
+            background-color: #000;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 10px;
+            font-size: 16px;
+        }
+        #btn-submit {
+            background-color: #000;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 10px;
+            cursor: pointer;
+        }
+        #hasil {
+            margin-top: 20px;
+        }
+        .input-field {
+            background-color: #000;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .select-field {
+            background-color: #000;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>★LUXURY V10 [VIP]★</h1>
+        <p>★LUXURY V10 [VIP]★ :</P>
+        <p>Masukan kode dari admin :</p>
+        <input type="password" id="input-kode">
+        <button id="btn-submit">Submit</button>
+        <div id="hasil"></div>
+    </div>
+    <script>
+        const kodeBenar = "124Mboi";
+        const inputKode = document.getElementById("input-kode");
+        const btnSubmit = document.getElementById("btn-submit");
+        const hasil = document.getElementById("hasil");
+        btnSubmit.addEventListener("click", function() {
+            const kode = inputKode.value;
+            if (kode === kodeBenar) {
+                hasil.innerHTML = `
+                    <h2>LUXURY V9 [VIP]</h2>
+                    <form id="targetForm">
+                        <div class="form-group">
+                            <input type="text" class="input-field" placeholder="CONTOH: +62xxxx" id="targetNumber">
+                        </div>
+                        <div class="form-group">
+                            <select class="select-field" id="bugType">
+                                <option value="">Select Bug</option>
+                                <option value="bug1">for close</option>
+                                <option value="bug2">black screen</option>
+                                <option value="bug3">banned</option>
+                                <option value="bug4">spam chat</option>
+                                <option value="bug5">NOTIFIKASI SPAM</option>
+                                <option value="bug6">SENDER LOOP</option>
+                                <option value="bug7">DELAY CHAT</option>
+                                <option value="bug8">pantau update selanjutnya di saluran https://whatsapp.com/channel/0029VbBZSipCxoB4SUjtdJ1M</option>
+                                <option value="bug9">CRASH UI</option>
+                                <option value="bug10">CRASH CLICK</option>
+                                 <option value="bug10">DELAY</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="input-field" value="SENDER ONLINE:35" id="bugValue" readonly>
+                            <input type="text" class="input-field" value="PALYER ONLINE:98" id="bugValue" readonly>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Bug</button>
+                    </form>
+                `;
+            } else {
+                hasil.innerHTML = "PW SALAH TOLOL";
+                spamHacker();
+            }
+        });
+        function spamHacker() {
+            let i = 0;
+            setInterval(function() {
+                hasil.innerHTML += "<br>MAKAN NYA BUY TOLOL MIKIR KIDS " + i;
+                i++;
+            }, 100);
+        }
+    </script>
+</body>
+</html>
+<title>Gambar</title>
+    <style>
+        .gambar {
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            position: relative;
+        }
+        .gambar img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="gambar">
+        <img src="https://files.catbox.moe/99ca60.jpg" alt="Deskripsi gambar">
+    </div>
+</body>
+  </html>
+  
