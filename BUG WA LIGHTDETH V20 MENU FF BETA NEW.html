@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Bug Gabungan (Tanpa Stuck)</title>
+    <style>
+        /* Reset dasar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Background RGB bergerak */
+        body {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff, #ff0000);
+            background-size: 400% 400%;
+            animation: rgbBackground 15s ease infinite;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        @keyframes rgbBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Foto & Video */
+        .foto {
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        .foto img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .video-container {
+            width: 320px;
+            height: 0;
+            padding-bottom: 56.25%;
+            position: relative;
+            margin: 15px 0;
+        }
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Halaman Umum */
+        .screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        /* Password WA (Tampil Pertama) */
+        #password-screen { display: flex; }
+        #bug-wa-menu, #ff-beta-password, #ff-beta-menu { display: none; }
+
+        /* Input & Tombol */
+        input {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            text-align: center;
+            color: #333;
+        }
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn-white { background: white; color: #333; }
+        .btn-trans { background: transparent; border: 2px solid white; color: white; }
+        .btn:hover { background: #f0f0f0; color: #333; }
+
+        /* Bug Options */
+        .bug-options {
+            width: 100%;
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: left;
+            gap: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        .online-info {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            display: flex;
+            justify-content: space-between;
+        }
+        .error-message {
+            color: #ffdddd;
+            font-size: 14px;
+            display: none;
+        }
+        .success-message {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ddffdd;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Halaman 1: Password WA -->
+    <div class="screen" id="password-screen">
+        <h2>Masukkan Password</h2>
+        <input type="password" id="password-input" placeholder="Ketik password disini">
+        <button class="btn btn-white" id="submit-password">Masuk</button>
+        <p class="error-message" id="error-text">Password salah! Coba lagi.</p>
+    </div>
+
+    <!-- Halaman 2: Menu Bug WA -->
+    <div class="screen" id="bug-wa-menu">
+        <div class="foto">
+            <img src="https://files.catbox.moe/99ca60.jpg" alt="Foto">
+        </div>
+        <div class="video-container">
+            <video controls>
+                <source src="https://files.catbox.moe/6m49u9.mp4" type="video/mp4">
+                Browsermu tidak mendukung video.
+            </video>
+        </div>
+
+        <h1>BUG WA BY ZIZZ V11</h1>
+        <label for="no-input">Masukkan nomor:</label>
+        <input type="text" id="no-input" placeholder="Ketik nomor disini">
+        
+        <label>Pilih jenis bug:</label>
+        <div class="bug-options">
+            <div><input type="radio" name="bug-type" value="force-close"> Force Close</div>
+            <div><input type="radio" name="bug-type" value="black-screen"> Black Screen</div>
+            <div><input type="radio" name="bug-type" value="malware"> Malware</div>
+            <div><input type="radio" name="bug-type" value="media-spam"> Media Spam</div>
+            <div><input type="radio" name="bug-type" value="ios-bug"> iOS Bug</div>
+
+            <div class="online-info">
+                <span>Sender online: <span id="sender-count">13</span></span>
+                <span>Player online: <span id="player-count">73</span></span>
+            </div>
+        </div>
+
+        <button class="btn btn-white" id="send-bug-wa">Kirim Bug</button>
+        <p class="success-message" id="bug-wa-success">BUG BERHASIL DIKIRIM!</p>
+
+        <button class="btn btn-trans" id="to-ff-beta-btn">MENU FF BETA</button>
+    </div>
+
+    <!-- Halaman 3: Password FF BETA -->
+    <div class="screen" id="ff-beta-password">
+        <h2>Masukkan Password FF BETA</h2>
+        <input type="password" id="ff-beta-password-input" placeholder="Ketik password FF BETA">
+        <button class="btn btn-white" id="ff-beta-submit">Masuk</button>
+        <p class="error-message" id="ff-beta-error">Password salah! Coba lagi.</p>
+    </div>
+
+    <!-- Halaman 4: Menu FF BETA -->
+    <div class="screen" id="ff-beta-menu">
+        <h1>FF BETA LIGHTDETH</h1>
+        <input type="text" id="ff-beta-id-input" placeholder="Masukkan ID FF">
+        <button class="btn btn-white" id="ff-beta-send">KIRIM ID</button>
+        <p class="success-message" id="ff-beta-success">ID BETA BERHASIL DIKIRIM!</p>
+
+        <button class="btn btn-trans" id="back-to-wa-btn">KEMBALI KE MENU WA</button>
+    </div>
+
+    <!-- JS LENGKAP TANPA KESALAHAN -->
+    <script>
+        // Ambil semua elemen
+        const passwordScreen = document.getElementById('password-screen');
+        const bugWaMenu = document.getElementById('bug-wa-menu');
+        const ffBetaPassword = document.getElementById('ff-beta-password');
+        const ffBetaMenu = document.getElementById('ff-beta-menu');
+        const passwordInput = document.getElementById('password-input');
+        const submitPassword = document.getElementById('submit-password');
+        const errorText = document.getElementById('error-text');
+        const toFfBetaBtn = document.getElementById('to-ff-beta-btn');
+        const ffBetaPasswordInput = document.getElementById('ff-beta-password-input');
+        const ffBetaSubmit = document.getElementById('ff-beta-submit');
+        const ffBetaError = document.getElementById('ff-beta-error');
+        const ffBetaSend = document.getElementById('ff-beta-send');
+        const ffBetaIdInput = document.getElementById('ff-beta-id-input');
+        const ffBetaSuccess = document.getElementById('ff-beta-success');
+        const backToWaBtn = document.getElementById('back-to-wa-btn');
+        const sendBugWa = document.getElementById('send-bug-wa');
+        const bugWaSuccess = document.getElementById('bug-wa-success');
+        const senderCount = document.getElementById('sender-count');
+        const playerCount = document.getElementById('player-count');
+
+        // Update angka online tiap 5 detik
+        let sCount = 13;
+        let pCount = 73;
+        setInterval(() => {
+            sCount += Math.floor(Math.random() * 3) + 1;
+            pCount += Math.floor(Math.random() * 5) + 1;
+            senderCount.textContent = sCount;
+            playerCount.textContent = pCount;
+        }, 5000);
+
+        // Aksi Masuk Password WA (PW: aziz54)
+        submitPassword.addEventListener('click', () => {
+            if (passwordInput.value === 'aziz54') {
+                passwordScreen.style.display = 'none';
+                bugWaMenu.style.display = 'flex';
+                errorText.style.display = 'none';
+            } else {
+                errorText.style.display = 'block';
+                passwordInput.value = '';
+            }
+        });
+
+        // Aksi Kirim Bug WA
+        sendBugWa.addEventListener('click', () => {
+            sendBugWa.disabled = true;
+            sendBugWa.style.opacity = '0.7';
+            bugWaSuccess.style.display = 'block';
+        });
+
+        // Aksi Ke Password FF BETA
+        toFfBetaBtn.addEventListener('click', () => {
+            bugWaMenu.style.display = 'none';
+            ffBetaPassword.style.display = 'flex';
+        });
+
+        // Aksi Masuk Password FF BETA (PW: aziz54)
+        ffBetaSubmit.addEventListener('click', () => {
+            if (ffBetaPasswordInput.value === 'aziz54') {
+                ffBetaPassword.style.display = 'none';
+                ffBetaMenu.style.display = 'flex';
+                ffBetaError.style.display = 'none';
+            } else {
+                ffBetaError.style.display = 'block';
+                ffBetaPasswordInput.value = '';
+            }
+        });
+
+        // Aksi Kirim ID FF
+        ffBetaSend.addEventListener('click', () => {
+            ffBetaSend.disabled = true;
+            ffBetaSend.style.opacity = '0.7';
+            ffBetaSuccess.style.display = 'block';
+        });
+
+        // Aksi Kembali Ke Menu WA
+        backToWaBtn.addEventListener('click', () => {
+            ffBetaMenu.style.display = 'none';
+            bugWaMenu.style.display = 'flex';
+            ffBetaSend.disabled = false;
+            ffBetaSend.style.opacity = '1';
+            ffBetaSuccess.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
