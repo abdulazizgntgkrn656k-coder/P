@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Foto</title>
+    <style>
+        .foto {
+            width: 100px; /* ukuran lebar foto */
+            height: 100px; /* ukuran tinggi foto */
+            position: relative;
+            overflow: hidden;
+        }
+        .foto img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="foto">
+        <img src="https://files.catbox.moe/99ca60.jpg" alt="Deskripsi foto">
+    </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video</title>
+    <style>
+        .video-container {
+            width: 320px; /* ukuran lebar video */
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            position: relative;
+        }
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <video controls>
+            <source src="https://files.catbox.moe/6m49u9.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</body>
+</html>
+
+<h1>BUG WA BY ZIZZ V11</h1>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Bug Sederhana</title>
+    <style>
+        /* Reset dasar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Semua halaman memiliki background RGB bergerak */
+        body {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff, #ff0000);
+            background-size: 400% 400%;
+            animation: rgbBackground 15s ease infinite;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            overflow: hidden; /* Mencegah scroll saat loading animasi */
+        }
+
+        /* Animasi background RGB */
+        @keyframes rgbBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Halaman Loading - Animasi tambahan */
+        #loading-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            position: relative;
+        }
+
+        /* Loader utama berputar + membesar/mengecil */
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 6px solid rgba(255,255,255,0.2);
+            border-top: 6px solid white;
+            border-radius: 50%;
+            animation: spinPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes spinPulse {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        /* Animasi titik-titik berkedip di teks loading */
+        .loading-text::after {
+            content: '';
+            animation: dots 1.5s infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: ''; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
+        }
+
+        /* Lingkaran kecil bergerak di sekitar loader */
+        .loader-dots {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            animation: rotateDots 8s linear infinite;
+        }
+
+        .loader-dots span {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+
+        .loader-dots span:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
+        .loader-dots span:nth-child(2) { bottom: 0; left: 50%; transform: translateX(-50%); }
+        .loader-dots span:nth-child(3) { left: 0; top: 50%; transform: translateY(-50%); }
+        .loader-dots span:nth-child(4) { right: 0; top: 50%; transform: translateY(-50%); }
+
+        @keyframes rotateDots {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Halaman Password */
+        #password-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        #password-input {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        #submit-password {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: white;
+            color: #333;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        #submit-password:hover {
+            background: #f0f0f0;
+        }
+
+        .error-message {
+            color: #ffdddd;
+            font-size: 14px;
+            display: none;
+        }
+
+        /* Halaman Menu Bug */
+        #bug-menu {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        #no-input {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            text-align: center;
+            color: #333;
+        }
+
+        /* Pilihan jenis bug */
+        .bug-options {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: left;
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .bug-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .bug-option:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .bug-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: white;
+        }
+
+        /* Bagian info online - ditambahkan style */
+        .online-info {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            font-size: 15px;
+            opacity: 0.9;
+        }
+
+        #send-bug {
+            padding: 20px 40px;
+            border: none;
+            border-radius: 15px;
+            background: white;
+            color: #333;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        #send-bug:hover {
+            transform: scale(1.05);
+        }
+
+        #bug-success {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ddffdd;
+            display: none;
+            animation: popIn 0.5s ease forwards;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Halaman Loading - Animasi tambahan -->
+    <div id="loading-screen">
+        <div class="loader-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="loader"></div>
+        <p class="loading-text">Menginisialisasi</p>
+    </div>
+
+    <!-- Halaman Masukkan Password -->
+    <div id="password-screen">
+        <h2>Masukkan Password</h2>
+        <input type="password" id="password-input" placeholder="Ketik password disini">
+        <button id="submit-password">Masuk</button>
+        <p class="error-message" id="error-text">Password salah! Coba lagi.</p>
+    </div>
+
+    <!-- Halaman Menu Bug - Ditambahkan pilihan jenis bug DAN info online -->
+    <div id="bug-menu">
+        <h1>Menu Bug</h1> 
+        <label for="no-input">Masukan no nya:</label>
+        <input type="text" id="no-input" placeholder="Ketik nomor disini">
+        
+        <!-- Pilihan jenis bug -->
+        <label>Pilih jenis bug:</label>
+        <div class="bug-options">
+            <div class="bug-option">
+                <input type="radio" name="bug-type" id="bug-1" value="force-close">
+                <label for="bug-1">1. Force Close</label>
+            </div>
+            <div class="bug-option">
+                <input type="radio" name="bug-type" id="bug-2" value="black-screen">
+                <label for="bug-2">2. Black Screen</label>
+            </div>
+            <div class="bug-option">
+                <input type="radio" name="bug-type" id="bug-3" value="malware">
+                <label for="bug-3">3. Malware</label>
+            </div>
+            <div class="bug-option">
+                <input type="radio" name="bug-type" id="bug-4" value="media-spam">
+                <label for="bug-4">4. Media Spam</label>
+            </div>
+            <div class="bug-option">
+                <input type="radio" name="bug-type" id="bug-5" value="ios-bug">
+                <label for="bug-5">5. iOS Bug</label>
+            </div>
+
+            <!-- Info sender & player online - ditambahkan di bawah pilihan bug -->
+            <div class="online-info">
+                <span>Sender online: <span id="sender-count">13</span></span>
+                <span>Player online: <span id="player-count">73</span></span>
+            </div>
+        </div>
+
+        <button id="send-bug">Kirim Bug</button>
+        <p id="bug-success">BUG BERHASIL DIKIRIM!</p>
+    </div>
+
+    <script>
+        // Ambil elemen dari HTML
+        const loadingScreen = document.getElementById('loading-screen');
+        const passwordScreen = document.getElementById('password-screen');
+        const bugMenu = document.getElementById('bug-menu');
+        const passwordInput = document.getElementById('password-input');
+        const submitPassword = document.getElementById('submit-password');
+        const errorText = document.getElementById('error-text');
+        const noInput = document.getElementById('no-input');
+        const bugTypeInputs = document.querySelectorAll('input[name="bug-type"]'); // Pilihan bug
+        const sendBug = document.getElementById('send-bug');
+        const bugSuccess = document.getElementById('bug-success');
+        // Elemen info online - ditambahkan
+        const senderCountEl = document.getElementById('sender-count');
+        const playerCountEl = document.getElementById('player-count');
+
+        // Nilai awal dan konfigurasi animasi
+        let senderCount = 13;
+        let playerCount = 73;
+        let isIncreasing = true; // Status apakah sedang bertambah atau berkurang
+
+        // Fungsi untuk memperbarui angka online
+        function updateOnlineCount() {
+            if (isIncreasing) {
+                // Tambah angka (1-3 agar tidak terlalu cepat)
+                senderCount += Math.floor(Math.random() * 3) + 1;
+                playerCount += Math.floor(Math.random() * 5) + 1;
+            } else {
+                // Kurang angka (1-2 agar tidak negatif cepat)
+                senderCount = Math.max(0, senderCount - (Math.floor(Math.random() * 2) + 1));
+                playerCount = Math.max(0, playerCount - (Math.floor(Math.random() * 3) + 1));
+            }
+
+            // Perbarui teks di HTML
+            senderCountEl.textContent = senderCount;
+            playerCountEl.textContent = playerCount;
+
+            // Ubah status setelah 5 detik
+            setTimeout(() => {
+                isIncreasing = !isIncreasing;
+                updateOnlineCount();
+            }, 5000); // 5000 ms = 5 detik
+        }
+
+        // Loading hanya 1,5 detik (tetap tidak lama)
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+            passwordScreen.style.display = 'flex';
+        }, 15500);
+
+        // Cek password
+        submitPassword.addEventListener('click', () => {
+            if (passwordInput.value === 'aziz54') {
+                passwordScreen.style.display = 'none';
+                bugMenu.style.display = 'flex';
+                errorText.style.display = 'none';
+                // Mulai animasi info online setelah masuk menu bug
+                updateOnlineCount();
+            } else {
+                errorText.style.display = 'block';
+                passwordInput.value = '';
+            }
+        });
+
+        // Aksi kirim bug (cek nomor + jenis bug)
+        sendBug.addEventListener('click', () => {
+            // Cek jika nomor kosong
+            if (noInput.value === '') {
+                alert('Mohon isi nomor terlebih dahulu!');
+                return;
+            }
+
+            // Cek jika jenis bug belum dipilih
+            let selectedBug = null;
+            bugTypeInputs.forEach(input => {
+                if (input.checked) selectedBug = input.value;
+            });
+            if (!selectedBug) {
+                alert('Mohon pilih jenis bug terlebih dahulu!');
+                return;
+            }
+
+            // Tampilkan pesan sukses
+            bugSuccess.style.display = 'block';
+            // Nonaktifkan semua elemen agar tidak diubah lagi
+            sendBug.disabled = true;
+            sendBug.style.opacity = '0.5';
+            noInput.disabled = true;
+            bugTypeInputs.forEach(input => input.disabled = true);
+        });
+
+        // Tambahan: Enter untuk masuk password
+        passwordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') submitPassword.click();
+        });
+
+        // Tambahan: Enter untuk kirim bug
+        noInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendBug.click();
+        });
+    </script>
+</body>
+</html>
+
+
